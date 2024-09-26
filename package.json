@@ -6,13 +6,16 @@
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
-    "build": "tsup src --out-dir build"
+    "build": "tsup src --out-dir build",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@rocketseat/eslint-config": "2.2.2",
+    "@types/bcryptjs": "2.4.6",
     "@types/node": "22.6.1",
     "eslint": "8.56.0",
     "prisma": "5.20.0",
@@ -22,6 +25,7 @@
   },
   "dependencies": {
     "@prisma/client": "5.20.0",
+    "bcryptjs": "2.4.3",
     "dotenv": "16.4.5",
     "fastify": "5.0.0",
     "zod": "3.23.8"
