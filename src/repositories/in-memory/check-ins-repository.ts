@@ -7,6 +7,14 @@ import { DEFAULT_PAGE_SIZE } from '@/constants/default'
 export class InMemoryCheckInsRepository implements ICheckInsRepository {
   public checkIns: CheckIn[] = []
 
+  async findById(id: string) {
+    const checkIn = this.checkIns.find((checkIn) => checkIn.id === id)
+
+    if (!checkIn) return null
+
+    return checkIn
+  }
+
   async findManyByUserId(userId: string, page: number) {
     return this.checkIns
       .filter((checkIn) => checkIn.user_id === userId)
@@ -44,6 +52,18 @@ export class InMemoryCheckInsRepository implements ICheckInsRepository {
     }
 
     this.checkIns.push(checkIn)
+
+    return checkIn
+  }
+
+  async save(checkIn: CheckIn) {
+    const checkInIndex = this.checkIns.findIndex(
+      (checkInFind) => checkInFind.id === checkIn.id,
+    )
+
+    if (checkInIndex >= 0) {
+      this.checkIns[checkInIndex] = checkIn
+    }
 
     return checkIn
   }
