@@ -12,7 +12,7 @@ function generateDatabaseUrl(schema: string) {
 
   const url = new URL(process.env.DATABASE_URL)
   url.searchParams.set('schema', schema)
-  
+
   return url.toString()
 }
 
@@ -29,7 +29,9 @@ export default <Environment>{
 
     return {
       teardown: async () => {
-        await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "${schema}" CASCADE`)
+        await prisma.$executeRawUnsafe(
+          `DROP SCHEMA IF EXISTS "${schema}" CASCADE`,
+        )
       },
     }
   },
