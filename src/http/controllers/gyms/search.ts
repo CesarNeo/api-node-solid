@@ -8,7 +8,7 @@ const searchGymQuerySchema = z.object({
 })
 
 export async function searchGym(request: FastifyRequest, reply: FastifyReply) {
-  const { query, page } = searchGymQuerySchema.parse(request.body)
+  const { query, page } = searchGymQuerySchema.parse(request.query)
 
   const searchGymUseCase = makeSearchGymsUseCase()
   const { gyms } = await searchGymUseCase.execute({ query, page })
