@@ -7,7 +7,7 @@ import { createGym } from './create'
 export async function gymsRoutes(app: FastifyInstance) {
   app.addHook('onRequest', verifyJwt)
 
-  app.get('gyms/search', searchGym)
-  app.get('gyms/nearby', nearbyGym)
-  app.post('gyms', createGym)
+  app.get('/gyms/search', searchGym)
+  app.get('/gyms/nearby', nearbyGym)
+  app.post('/gyms', createGym)
 }
