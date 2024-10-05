@@ -5,11 +5,12 @@ export async function refreshToken(
   reply: FastifyReply,
 ) {
   await request.jwtVerify({ onlyCookie: true })
+  const { role, sub } = request.user
 
-  const token = await reply.jwtSign({}, { sign: { sub: request.user.sub } })
+  const token = await reply.jwtSign({ role }, { sign: { sub } })
   const refreshToken = await reply.jwtSign(
-    {},
-    { sign: { sub: request.user.sub, expiresIn: '7d' } },
+    { role },
+    { sign: { sub, expiresIn: '7d' } },
   )
 
   return reply
